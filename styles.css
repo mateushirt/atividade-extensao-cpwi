@@ -1,12 +1,19 @@
+/* Fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Ícones do Google Material Design */
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+
 :root {
-    --cor-principal: #c9c9c9;
+    --cor-principal: #D9D9D9;
     --cor-secundaria: #B9B9B9;
-    --cor-terciaria: #888888;
+    --cor-terciaria: #888;
+
     --sucesso: #2DB957;
     --branco: #F7F7F7;
     --preto: #222;
     
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter, Arial, Helvetica, sans-serif;
     & * { box-sizing: border-box; }
     & body { margin: 0; }
 }
@@ -44,35 +51,42 @@ header.segment-header {
         font-size: 11pt;
     }
 
-    & .return-button { /* Placeholder por enquanto */
-        border: 1px solid red;
+    & .return-button a span {
         align-content: center;
+        color: var(--preto);
+        text-align: left;
+        font-size: 22pt;
         height: 50px;
-        width: 50px;
+        width: 35px;
     }
 
-    & div.segment-info {
-        & * {
-            margin-left: 20px;
-            line-height: 5px;
-            display: block;
-        }
+    & div.segment-info * {
+        margin-left: 20px;
+        line-height: 5px;
+        display: block;
+    }
+}
 
-        & .progress-bar {
-            display: flex;
-            width: 100%;
-            gap: 10px;
-            margin: 0;
-        }
+.progress-bar {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin: 0;
 
-        & .progress-bar * {
-            border: 1px solid black;
-            background-color: red;
-            border-radius: 50px;
-            flex-shrink: 0;
-            height: 10px;
-            width: 150px;
-        }
+    & * {
+        border-radius: 50px;
+        flex-shrink: 0;
+        height: 10px;
+        width: calc(100vw / 2 - 25px);
+    }
+
+    & .complete {
+        background-color: var(--preto);
+    }
+
+    & .incomplete {
+        background-color: var(--cor-secundaria);
+        border: 1px solid var(--preto);
     }
 }
 
@@ -103,26 +117,77 @@ header.segment-header {
 
 .step.read {
     & img {
-        width: 350px;
+        width: 280px;
+        height: 180px;
+        display: block;
+        margin-inline: auto;
     }
+
+    & p {
+        font-size: 14pt;
+        margin: 0 auto;
+        width: 75vw;
+    }
+
+    & .numeros-medidor {
+        text-align: center;
+        margin: 30px;
+        
+        & .numero {
+            /* Tirar as setinhas do input number */
+            -webkit-appearance: textfield;
+            -moz-appearance: textfield;
+
+            font-family: monospace, 'Courier New', Courier;
+            border: 1px solid var(--preto);
+            border-radius: 10px;
+            color: var(--preto);
+            margin-right: 2px;
+            font-weight: bold;
+            padding: 5px 15px;
+            font-size: 40pt;
+            cursor: pointer;
+            width: 60px;
+            outline: 2px dashed transparent;
+
+            &:focus {
+                outline: 2px dashed var(--cor-principal);
+                outline-offset: 2px;
+                background-color: var(--preto);
+                color: var(--branco);
+                transition: 10ms;
+            }
+            
+            &::selection {
+                background-color: var(--preto);
+            }
+        }
+    }
+}
+
+.button-row {
+    text-align: center;
+
+    & * { display: inline-block; }
 }
 
 button {
     border-radius: 5px;
-    padding: 5px 20px;
-    height: 40px;
-    width: 250px;
     font-weight: bold;
+    padding: 5px 20px;
+    cursor: pointer;
+    height: 40px;
+    width: 160px;
 
     &.primary {
         background-color: var(--cor-principal);
-        color: var(--branco);
+        color: var(--preto);
         border: none;
     }
 
     &.secondary {
-        border: 1px solid var(--cor-principal);
+        border: 1px solid var(--preto);
         background-color: transparent;
-        color: var(--cor-principal);
+        color: var(--preto);
     }
 }
