@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <title>Página inicial</title>
 </head>
 <body>
     <header class="segment-header">
         <div class="row">
-            <div class="return-button">
+            <div class="return-button" title="Voltar para a tela inicial">
                 <a href="index.html"><span class="material-symbols-outlined">arrow_back</span></a>
             </div>
 
@@ -29,18 +29,18 @@
     <main>
         <section class="step read">
             <p>Quais os <strong>números pretos</strong> que estão aparecendo <strong>no seu medidor</strong>?</p>
-            <img src="numero-medidor-placeholder.jpg" alt="">
+            <img src="img/hidrometro.jpg" alt="">
 
             <div class="numeros-medidor">
-                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
-                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
-                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
-                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';" required>
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';" required>
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';" required>
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';" required>
             </div>
 
             <div class="button-row">
                 <button class="secondary" onclick="location.href='index.html';">Cancelar</button>
-                <button class="primary" onclick="read_step(+1);">Próximo &rarr;</button>
+                <button class="primary" onclick="read_step(+1);" disabled>Próximo &rarr;</button>
             </div>
         </section>
 
@@ -49,35 +49,46 @@
             
             <label for="input-reading-picture" tabindex="0" role="button" id="label-reading-picture">
                 Clique aqui para enviar uma imagem
-                <input type="file" name="reading-picture" id="input-reading-picture" accept="image/*">
+                <input type="file" name="reading-picture" id="input-reading-picture" accept="image/*" required>
             </label>
             
             <div class="button-row">
                 <button class="secondary" onclick="read_step(-1);">&larr; Voltar</button>
-                <button class="primary" onclick="read_step(+1);">Finalizar a leitura</button>
+                <button class="primary" onclick="read_step(+1);" disabled>Finalizar a leitura</button>
             </div>
         </section>
 
         <section class="step finished" hidden>
-            <p>Leitura finalizada com sucesso!</p>
+            <div class="finish-message">
+                <span class="material-symbols-outlined">check_circle</span>
+                <h2>Leitura finalizada com sucesso!</h2>
+                <p>Sua leitura está pendente de análise e pode ser editada antes da efetivação na opção de Histórico e Pagamento</p>
+            </div>
 
             <div class="reading-info">
-                <span class="house">Casa 321 <span class="house-nickname">(Nome da casa aqui)</span></span>
-                <img id="reading-image" src="" alt="">
-                <table>
-                    <tr>
-                        <th>Leitura</th>
-                        <td>1234</td>
-                    </tr>
-                    <tr>
-                        <th>Consumo</th>
-                        <td>123 m²</td>
-                    </tr>
-                    <tr>
-                        <th>Estimativa de valor*</th>
-                        <td>R$ 12.345,67</td>
-                    </tr>
-                </table>
+                <div class="house-info">
+                    <span class="house">
+                        Casa 321
+                        <span class="house-nickname">(Nome da casa aqui)</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <img id="reading-image" src="" alt="">
+                    <table>
+                        <tr>
+                            <th>Leitura</th>
+                            <td>1234</td>
+                        </tr>
+                        <tr>
+                            <th>Consumo</th>
+                            <td>123 m²</td>
+                        </tr>
+                        <tr>
+                            <th>Estimativa de valor*</th>
+                            <td>R$ 12.345,67</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <small>*Esta é apenas uma estimativa do valor com base na leitura feita, pode não ser o valor final, sofrendo alterações após a análise feita pela associação. Esta leitura passará por análise antes de ser efetivada.</small>

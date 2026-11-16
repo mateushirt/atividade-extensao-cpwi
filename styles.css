@@ -5,17 +5,23 @@
 .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
 
 :root {
-    --cor-principal: #D9D9D9;
-    --cor-secundaria: #B9B9B9;
-    --cor-terciaria: #888;
+    --cor-principal: #1D4E7E;
+    --cor-secundaria: #6788AE;
+    --cor-terciaria: #888888;
 
-    --sucesso: #2DB957;
+    --sucesso: #39a258;
     --branco: #F7F7F7;
-    --preto: #222;
+    --preto: #222222;
     
     font-family: Inter, Arial, Helvetica, sans-serif;
+
     & * { box-sizing: border-box; }
-    & body { margin: 0; }
+
+    & body {
+        margin: 0;
+        color:  var(--preto);
+        background-color: var(--branco);
+    }
 }
 
 header.homepage-header {
@@ -25,6 +31,7 @@ header.homepage-header {
 
     & * {
         display: inline-block;
+        color: var(--branco);
         font-size: 11pt;
     }
 
@@ -44,6 +51,7 @@ header.homepage-header {
 header.segment-header {
     background-color: var(--cor-principal);
     padding: 50px 20px 20px 20px;
+    color: var(--branco);
     width: 100%;
 
     & * {
@@ -53,7 +61,7 @@ header.segment-header {
 
     & .return-button a span {
         align-content: center;
-        color: var(--preto);
+        color: var(--branco);
         text-align: left;
         font-size: 22pt;
         height: 50px;
@@ -81,20 +89,15 @@ header.segment-header {
     margin: 0;
 
     & * {
+        border: 1px solid var(--preto);
+        width: calc(100vw / 2 - 25px);
         border-radius: 50px;
         flex-shrink: 0;
         height: 10px;
-        width: calc(100vw / 2 - 25px);
     }
 
-    & .complete {
-        background-color: var(--preto);
-    }
-
-    & .incomplete {
-        background-color: var(--cor-secundaria);
-        border: 1px solid var(--preto);
-    }
+    & .complete { background-color: var(--branco); }
+    & .incomplete { background-color: var(--cor-secundaria); }
 }
 
 .homepage-button {
@@ -108,17 +111,27 @@ header.segment-header {
     & img {
         border: 1px solid black;
         border-radius: 10px;
+        height: 180px;
+        width: 330px;
         width: 100%;
     }
     
     & h2 {
+        text-shadow: var(--preto) 1px 1px 20px, var(--preto) -1px -1px 20px;
+        color: var(--branco);
         text-decoration: none;
         position: relative;
         font-size: 18pt;
-        color: white;
         left: 20px;
         top: -65px;
-        text-shadow: var(--preto) 1px 1px 2px, var(--preto) -1px -1px 2px;
+        width: 100%;
+    }
+
+    *:focus-visible { outline: none; }
+
+    & a:focus-visible img {
+        outline: 2px dashed var(--cor-principal);
+        outline-offset: 5px;
     }
 }
 
@@ -144,7 +157,8 @@ header.segment-header {
         margin: 30px;
         
         & .numero {
-            /* Tirar as setinhas do input number */
+            /* Tirar as setinhas do input number. Tem que estar nesta ordem! */
+            appearance: none;
             -webkit-appearance: none;
             -moz-appearance: textfield;
 
@@ -160,7 +174,7 @@ header.segment-header {
             cursor: pointer;
             width: 60px;
 
-            &:focus {
+            &:focus-visible {
                 outline: 2px dashed var(--cor-principal);
                 background-color: var(--preto);
                 color: var(--branco);
@@ -183,7 +197,7 @@ header.segment-header {
     }
 
     label {
-        border: 3px dashed var(--cor-principal);
+        border: 2px dashed var(--cor-principal);
         background-color: transparent;
         background-repeat: no-repeat;
         background-position: center;
@@ -194,17 +208,106 @@ header.segment-header {
         margin: 15px auto;
         font-size: 10pt;
         display: block;
-        padding: 10px;
         height: 274px;
         width: 280px;
 
-        &:hover, &:focus {
-            background-color: var(--cor-principal);
-            border: 3px dashed var(--branco);
+        &:hover {
+            background-color: var(--cor-secundaria);
+            border: none;
             cursor: pointer;
+            color: var(--branco);
+            transition: 100ms;
+        }
+
+        &:focus-visible {
+            outline: 2px dashed var(--cor-secundaria);
+            border: 2px solid var(--cor-principal);
+            outline-offset: 5px;
         }
 
         & input[type="file"] { display: none; } /* Quem recebe a estilização é o label do input */
+    }
+}
+
+.step.finished {
+    & .finish-message {
+        color: var(--sucesso);
+        text-align: center;
+        margin: 0 auto;
+        width: 80vw;
+
+        & span {
+            font-size: 60px;
+        }
+
+        & h2 {
+            margin-top: 5px;
+            font-size: 20px;
+            margin: 0 auto;
+            width: 40vw;
+        }
+
+        & p {
+            color: var(--preto);
+            font-size: 12px;
+        }
+    }
+
+    & .reading-info {
+        border: 2px solid var(--cor-principal);
+        border-radius: 10px;
+        margin: 40px auto;
+        padding: 10px;
+        width: 400px;
+
+        & .house-info {
+            margin-bottom: 10px;
+
+            & .house { font-weight: bold; }
+            & .house-nickname { font-weight: normal; }
+        }
+
+        & .row {
+            display: inline-flex;
+
+            & img {
+                border: 2px solid var(--cor-secundaria);
+                border-radius: 8px;
+                align-self: center;
+                margin-right: 20px;
+                height: 70px;
+                width: 70px;
+            }
+
+            & table {
+                border-collapse: collapse;
+                width: 5px;
+            }
+
+            & th {
+                font-weight: bold;
+                text-align: left;
+                min-width: 140px;
+                font-size: 10pt;
+            }
+
+            & td {
+                font-weight: normal;
+                text-align: right;
+                min-width: 140px;
+            }
+        }
+    }
+
+    & small {
+        margin: 20px auto 20px auto;
+        text-align: justify;
+        font-weight: 200;
+        line-height: 1;
+        max-width: 500px;
+        font-size: 8pt;
+        display: block;
+        width: 80vw;
     }
 }
 
@@ -217,19 +320,34 @@ button {
     border-radius: 5px;
     font-weight: bold;
     padding: 5px 20px;
+    min-width: 160px;
     cursor: pointer;
     height: 40px;
-    min-width: 160px;
 
     &.primary {
         background-color: var(--cor-principal);
-        color: var(--preto);
+        color: var(--branco);
         border: none;
+
+        &:focus-visible {
+            outline: 2px dashed var(--branco);
+            outline-offset: -4px;
+        }
+
+        &:disabled {
+            background-color: lightgray;
+            color: gray;
+        }
     }
 
     &.secondary {
-        border: 1px solid var(--preto);
+        border: 1px solid var(--cor-principal);
         background-color: transparent;
-        color: var(--preto);
+        color: var(--cor-principal);
+
+        &:focus-visible {
+            outline: 2px dashed var(--cor-secundaria);
+            outline-offset: -4px;
+        }
     }
 }
