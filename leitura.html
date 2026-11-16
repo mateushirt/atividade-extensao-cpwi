@@ -15,8 +15,8 @@
             </div>
 
             <div class="segment-info">
-                <strong>Fazer a leitura</strong>
-                <p>Passo 1 de 2 - Número no hidrômetro</p>
+                <span class="step-title">Fazer a leitura</span>
+                <span class="step-info">Passo 1 de 2 - Número no hidrômetro</span>
             </div>
         </div>
 
@@ -32,27 +32,62 @@
             <img src="numero-medidor-placeholder.jpg" alt="">
 
             <div class="numeros-medidor">
-                <!-- AS FUNÇÕES SÃO PLACEHOLDER -->
-                <input type="number" class="numero" value="0" maxlength="1" onfocus="this.select();" oninput="meter_next_number();">
-                <input type="number" class="numero" value="0" maxlength="1" onfocus="this.select();" oninput="meter_next_number();">
-                <input type="number" class="numero" value="0" maxlength="1" onfocus="this.select();" oninput="meter_next_number();">
-                <input type="number" class="numero" value="0" maxlength="1" onfocus="this.select();" oninput="meter_next_number();">
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
+                <input type="number" class="numero" value="-1" maxlength="1" onfocus="this.select(); this.value = '';">
             </div>
 
             <div class="button-row">
                 <button class="secondary" onclick="location.href='index.html';">Cancelar</button>
-                <button class="primary" onclick="read_step(+1);">Próximo &rarr;</button> <!-- PLACEHOLDER -->
+                <button class="primary" onclick="read_step(+1);">Próximo &rarr;</button>
             </div>
         </section>
 
-        <section class="step read" hidden> <!-- Hidden por enquanto -->
+        <section class="step picture" hidden>
             <p>Tire ou envie uma <strong>foto do medidor</strong> com os <strong>números visíveis</strong>:</p>
             
-            [Pré-visualização da imagem]
+            <label for="input-reading-picture" tabindex="0" role="button" id="label-reading-picture">
+                Clique aqui para enviar uma imagem
+                <input type="file" name="reading-picture" id="input-reading-picture" accept="image/*">
+            </label>
             
-            <button class="secondary" onclick="read_step(-1);">&larr; Voltar</button> <!-- PLACEHOLDER -->
-            <button class="primary" onclick="read_step(+1);">Finalizar a leitura</button> <!-- PLACEHOLDER -->
+            <div class="button-row">
+                <button class="secondary" onclick="read_step(-1);">&larr; Voltar</button>
+                <button class="primary" onclick="read_step(+1);">Finalizar a leitura</button>
+            </div>
+        </section>
+
+        <section class="step finished" hidden>
+            <p>Leitura finalizada com sucesso!</p>
+
+            <div class="reading-info">
+                <span class="house">Casa 321 <span class="house-nickname">(Nome da casa aqui)</span></span>
+                <img id="reading-image" src="" alt="">
+                <table>
+                    <tr>
+                        <th>Leitura</th>
+                        <td>1234</td>
+                    </tr>
+                    <tr>
+                        <th>Consumo</th>
+                        <td>123 m²</td>
+                    </tr>
+                    <tr>
+                        <th>Estimativa de valor*</th>
+                        <td>R$ 12.345,67</td>
+                    </tr>
+                </table>
+            </div>
+
+            <small>*Esta é apenas uma estimativa do valor com base na leitura feita, pode não ser o valor final, sofrendo alterações após a análise feita pela associação. Esta leitura passará por análise antes de ser efetivada.</small>
+            
+            <div class="button-row">
+                <button class="primary" onclick="location.href='index.html';">Voltar para a tela inicial</button>
+            </div>
         </section>
     </main>
+
+    <script src="interaction.js"></script>
 </body>
 </html>

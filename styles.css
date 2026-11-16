@@ -60,10 +60,17 @@ header.segment-header {
         width: 35px;
     }
 
-    & div.segment-info * {
-        margin-left: 20px;
-        line-height: 5px;
-        display: block;
+    & div.segment-info { 
+        & *{
+            margin-left: 20px;
+            line-height: 5px;
+            display: block;
+        }
+        
+        & span.step-title {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
     }
 }
 
@@ -115,12 +122,15 @@ header.segment-header {
     }
 }
 
+.step { margin-top: 15px; }
+
 .step.read {
     & img {
-        width: 280px;
-        height: 180px;
-        display: block;
         margin-inline: auto;
+        margin-top: 15px;
+        display: block;
+        height: 180px;
+        width: 280px;
     }
 
     & p {
@@ -135,10 +145,11 @@ header.segment-header {
         
         & .numero {
             /* Tirar as setinhas do input number */
-            -webkit-appearance: textfield;
+            -webkit-appearance: none;
             -moz-appearance: textfield;
 
             font-family: monospace, 'Courier New', Courier;
+            outline: 2px dashed transparent;
             border: 1px solid var(--preto);
             border-radius: 10px;
             color: var(--preto);
@@ -148,13 +159,12 @@ header.segment-header {
             font-size: 40pt;
             cursor: pointer;
             width: 60px;
-            outline: 2px dashed transparent;
 
             &:focus {
                 outline: 2px dashed var(--cor-principal);
-                outline-offset: 2px;
                 background-color: var(--preto);
                 color: var(--branco);
+                outline-offset: 2px;
                 transition: 10ms;
             }
             
@@ -165,9 +175,41 @@ header.segment-header {
     }
 }
 
+.step.picture {
+    & p {
+        font-size: 14pt;
+        margin: 0 auto;
+        width: 75vw;
+    }
+
+    label {
+        border: 3px dashed var(--cor-principal);
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        align-content: center;
+        border-radius: 5px;
+        text-align: center;
+        margin: 15px auto;
+        font-size: 10pt;
+        display: block;
+        padding: 10px;
+        height: 274px;
+        width: 280px;
+
+        &:hover, &:focus {
+            background-color: var(--cor-principal);
+            border: 3px dashed var(--branco);
+            cursor: pointer;
+        }
+
+        & input[type="file"] { display: none; } /* Quem recebe a estilização é o label do input */
+    }
+}
+
 .button-row {
     text-align: center;
-
     & * { display: inline-block; }
 }
 
@@ -177,7 +219,7 @@ button {
     padding: 5px 20px;
     cursor: pointer;
     height: 40px;
-    width: 160px;
+    min-width: 160px;
 
     &.primary {
         background-color: var(--cor-principal);
