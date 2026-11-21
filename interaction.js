@@ -1,3 +1,10 @@
+// Retira o logo da associação se identificar que está utilizando a imagem de placeholder (sem logo)
+verify_logo();
+function verify_logo() {
+	const logo_element = document.querySelector('#logo');
+	if (logo_element && logo_element.src.endsWith('img/placeholder.jpg')) { logo_element.style.display = 'none'; }
+}
+
 let current_step = 1;
 
 function read_step(steps) {
@@ -57,7 +64,7 @@ reading_input_element.addEventListener('change', (event) => {
 	reading_file_link = URL.createObjectURL(file);
 
 	reading_label_element.style.backgroundImage = `url('${reading_file_link}')`;
-	
+
 	document.querySelector('#reading-image').src = `${reading_file_link}`;
 	document.querySelectorAll('.primary')[1].disabled = false;
 })
@@ -70,7 +77,7 @@ input_elements.forEach((input, index) => {
 			input_elements[index + 1].focus();
 		}
 
-		if (index == input_elements.length - 1 || input_elements[-1].value >= 0) {
+		if (index == input_elements.length - 1 || input_elements[-1].value >= 0 || input_elements[-1].value != '') {
 			document.querySelectorAll('.primary')[0].disabled = false;
 		}
 	})
