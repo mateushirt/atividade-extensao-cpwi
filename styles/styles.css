@@ -1,0 +1,158 @@
+/* Ícones do Google Material Design */
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+
+/* Fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --cor-principal: #1D4E7E;
+    --cor-secundaria: #6788AE;
+    --cor-terciaria: #888888;
+
+    --sucesso: #39a258;
+    --branco: #F7F7F7;
+    --preto: #222222;
+    
+    font-family: Inter, Arial, Helvetica, sans-serif;
+
+    & * { box-sizing: border-box; }
+
+    & body {
+        margin: 0;
+        color:  var(--preto);
+        background-color: var(--branco);
+    }
+}
+
+header.homepage-header {
+    background-color: var(--cor-principal);
+    padding: 50px 20px 20px 20px;
+    width: 100%;
+
+    & * {
+        display: inline-block;
+        color: var(--branco);
+        font-size: 11pt;
+    }
+
+    & img {
+        border: 1px solid var(--preto);
+        height: 50px;
+        width: 110px;
+    }
+
+    & div.house-info * {
+        margin-left: 20px;
+        line-height: 5px;
+        display: block;
+    }
+}
+
+.homepage-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+}
+
+.homepage-button {
+    margin-bottom: 50px;
+    flex-basis: 330px;
+    list-style: none;
+    height: 140px;
+
+    & a { text-decoration: none; }
+    
+    & img {
+        border: 1px solid black;
+        border-radius: 10px;
+        height: 180px;
+        width: 330px;
+        width: 100%;
+    }
+    
+    & h2 {
+        text-shadow: var(--preto) 1px 1px 20px, var(--preto) -1px -1px 20px;
+        color: var(--branco);
+        text-decoration: none;
+        position: relative;
+        font-size: 18pt;
+        left: 20px;
+        top: -65px;
+        width: 100%;
+    }
+
+    *:focus-visible { outline: none; }
+
+    & a:focus-visible img {
+        outline: 2px dashed var(--cor-principal);
+        outline-offset: 5px;
+    }
+}
+
+.button-row {
+    text-align: center;
+    & * { display: inline-block; }
+}
+
+button {
+    outline: 2px none var(--cor-secundaria);
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px 20px;
+    transition: 100ms;
+    min-width: 160px;
+    cursor: pointer;
+    height: 40px;
+    
+    & a, & a:visited {
+        color: var(--preto);
+        text-decoration: none;
+    }
+
+    &.primary {
+        background-color: var(--cor-principal);
+        color: var(--branco);
+        border: none;
+
+        &:focus-visible {
+            outline: 2px dashed var(--branco);
+            outline-offset: -4px;
+        }
+
+        &:disabled {
+            background-color: lightgray;
+            color: gray;
+        }
+
+        &:hover {
+            background-color: var(--cor-secundaria);
+            cursor: pointer;
+        }
+    }
+
+    &.secondary {
+        border: 1px solid var(--cor-principal);
+        background-color: transparent;
+        color: var(--cor-principal);
+
+        &:focus-visible {
+            outline: 2px dashed var(--cor-secundaria);
+            outline-offset: -4px;
+        }
+
+        &:hover {
+            background-color: var(--cor-secundaria);
+            border-color: transparent;
+            color: var(--branco);
+            cursor: pointer;
+        }
+    }
+
+    &:disabled:hover {
+        background-color: #ECC;
+        border: 2px solid #A88;
+        color: #A88;
+    }
+}

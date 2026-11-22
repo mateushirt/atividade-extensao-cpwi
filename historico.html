@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#222222">
-    <link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" href="styles/segment-style.css">
     <title>Página inicial</title>
 </head>
 <body>
@@ -27,61 +27,68 @@
     </header>
 
     <main>
-		<section class="boxes-container">
-			<div class="number-box last-month">
-				<h3>Último mês</h3>
-				<span>123 m³</span>
-			</div>
-
-			<div class="number-box average">
-				<h3>Média 06 meses</h3>
-				<span>123 m³</span>
-			</div>
-		</section>
-
-		<!-- Gráfico de consumo -->
-        <section class="container">
-			<h3>Consumo dos últimos seis meses</h3>
-
-			<div class="graph">
-				<div class="data">
-					<span class="read">123 m³</span>
-					<div class="column"></div>
-					<span class="month">jan</span>
+		<section class="row-container">
+			<section class="boxes-container">
+				<div class="number-box last-month">
+					<h3>Último mês</h3>
+					<span>123 m³</span>
 				</div>
 
-				<div class="data">
-					<span class="read">123 m³</span>
-					<div class="column"></div>
-					<span class="month">fev</span>
+				<div class="number-box average">
+					<h3>Média (06 meses)</h3>
+					<span>123 m³</span>
+				</div>
+				
+				<div class="number-box average">
+					<h3>Mês maior consumo (06 meses)</h3>
+					<span>jan/26</span>
+				</div>
+			</section>
+
+			<!-- Gráfico de consumo -->
+			<section class="container">
+				<h3>Consumo dos últimos seis meses</h3>
+
+				<div class="bar-graph">
+					<div class="data">
+						<span class="month">jan</span>
+						<div class="bar"></div>
+						<span class="read">123 m³</span>
+					</div>
+
+					<div class="data">
+						<span class="month">fev</span>
+						<div class="bar"></div>
+						<span class="read">123 m³</span>
+					</div>
+
+					<div class="data">
+						<span class="month">mar</span>
+						<div class="bar"></div>
+						<span class="read">123 m³</span>
+					</div>
+
+					<div class="data">
+						<span class="month">abr</span>
+						<div class="bar"></div>
+						<span class="read">123 m³</span>
+					</div>
+
+					<div class="data">
+						<span class="month">mai</span>
+						<div class="bar"></div>
+						<span class="read">123 m³</span>
+					</div>
+
+					<div class="data">
+						<span class="month">jun</span>
+						<div class="bar"></div>
+						<span class="read">123 m³</span>
+					</div>
 				</div>
 
-				<div class="data">
-					<span class="read">123 m³</span>
-					<div class="column"></div>
-					<span class="month">mar</span>
-				</div>
-
-				<div class="data">
-					<span class="read">123 m³</span>
-					<div class="column"></div>
-					<span class="month">abr</span>
-				</div>
-
-				<div class="data">
-					<span class="read">123 m³</span>
-					<div class="column"></div>
-					<span class="month">mai</span>
-				</div>
-
-				<div class="data">
-					<span class="read">123 m³</span>
-					<div class="column"></div>
-					<span class="month">jun</span>
-				</div>
-			</div>
-
-			<button class="secondary"><a href="PLACEHOLDER">Ver mais meses &rarr;</a></button>
+				<button class="secondary"><a href="PLACEHOLDER">Ver mais meses &rarr;</a></button>
+			</section>
 		</section>
 
 		<section class="container">
@@ -110,6 +117,6 @@
 		</section>
     </main>
 
-    <script src="interaction.js"></script>
+    <script src="scripts/interaction.js"></script>
 </body>
 </html>
