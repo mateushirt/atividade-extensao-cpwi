@@ -47,6 +47,14 @@ header.homepage-header {
         line-height: 5px;
         display: block;
     }
+
+    & .logout-button a span {
+        color: var(--branco);
+        font-size: 22pt;
+        position: absolute; /* VERIFICAR: Mudar para não ser absolute */
+        right: 45px;
+        top: 60px;
+    }
 }
 
 .homepage-buttons {

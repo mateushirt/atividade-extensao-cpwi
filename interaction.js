@@ -1,3 +1,7 @@
+// VERIFICAR: Jogar essas funções em arquivos .js separados, está virando um espaguete
+
+const current_house = 321;
+
 // Retira o logo da associação se identificar que está utilizando a imagem de placeholder (sem logo)
 verify_logo();
 function verify_logo() {
@@ -5,8 +9,25 @@ function verify_logo() {
 	if (logo_element && logo_element.src.endsWith('img/placeholder.jpg')) { logo_element.style.display = 'none'; }
 }
 
-let current_step = 1;
+// Informações do localStorage
+const houses = houses_information();
+function houses_information(){
+	const saved_info = localStorage.getItem('houses');
 
+	if (saved_info) { return JSON.parse(saved_info); }
+
+	// Se chegou aqui, pega das informações do dados.js, transforma em string e joga no localStorage
+	save_houses(houses_data);
+	return houses_data;
+}
+
+function save_houses(houses) {
+	const info_to_save = JSON.stringify(houses);
+	localStorage.setItem('houses', info_to_save);
+}
+
+// Atualiza os passos para realizar a leitura do hidrômetro
+let current_step = 1;
 function read_step(steps) {
 	if (current_step + steps > 0) { current_step += steps; }
 	
@@ -45,29 +66,30 @@ function update_progress_bar () {
 
 const reading_label_element = document.getElementById('label-reading-picture');
 const reading_input_element = document.getElementById('input-reading-picture');
+if(reading_label_element && reading_input_element) {
+	// Pega toda vez que o label é selecionado com o Tab e acionado com o Enter, simulando um clique no input para que ele solicite o arquivo
+	reading_label_element.addEventListener('keydown', (event) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			reading_input_element.click();
+		}
+	});
 
-// Pega toda vez que o label é selecionado com o Tab e acionado com o Enter, simulando um clique no input para que ele solicite o arquivo
-reading_label_element.addEventListener('keydown', (event) => {
-	if (event.key === 'Enter' || event.key === ' ') {
-		event.preventDefault();
-		reading_input_element.click();
-	}
-});
+	// Pega o arquivo enviado para o input, salva ele em um link/URL temporário e aplica a imagem como imagem de fundo do input e atualiza a imagem das informações da leitura (tela de leitura finalizada)
+	let reading_file_link = null;
+	reading_input_element.addEventListener('change', (event) => {
+		const file = event.target.files[0];
+		if (!file) { return; }
 
-// Pega o arquivo enviado para o input, salva ele em um link/URL temporário e aplica a imagem como imagem de fundo do input e atualiza a imagem das informações da leitura (tela de leitura finalizada)
-let reading_file_link = null;
-reading_input_element.addEventListener('change', (event) => {
-	const file = event.target.files[0];
-	if (!file) { return; }
+		if (reading_file_link) { URL.revokeObjectURL(reading_file_link); }
+		reading_file_link = URL.createObjectURL(file);
 
-	if (reading_file_link) { URL.revokeObjectURL(reading_file_link); }
-	reading_file_link = URL.createObjectURL(file);
+		reading_label_element.style.backgroundImage = `url('${reading_file_link}')`;
 
-	reading_label_element.style.backgroundImage = `url('${reading_file_link}')`;
-
-	document.querySelector('#reading-image').src = `${reading_file_link}`;
-	document.querySelectorAll('.primary')[1].disabled = false;
-})
+		document.querySelector('#reading-image').src = `${reading_file_link}`;
+		document.querySelectorAll('.primary')[1].disabled = false;
+	})
+}
 
 // Essa função é a que faz os inputs "pularem" de um para o outro ao digitar um valor na hora de fazer a medição
 const input_elements = document.querySelectorAll('.numero[type=\'number\']');
@@ -82,3 +104,11 @@ input_elements.forEach((input, index) => {
 		}
 	})
 })
+
+// VERIFICAR: Atualiza os dados do histórico
+update_historic_info();
+function update_historic_info() {
+	console.log(`Número: ${houses[1].house_number}`);
+	console.log(`Nome: ${houses[1].house_name}`);
+	console.log(`Leituras: ${houses[1].readings}`);
+}

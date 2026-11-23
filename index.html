@@ -6,6 +6,9 @@
     <meta name="theme-color" content="#222222">
     <link rel="stylesheet" href="styles/styles.css">
     <title>Página inicial</title>
+
+    <!-- Dados que vão ir ao localStorage -->
+    <script src="dados.js"></script>
 </head>
 <body>
     <header class="homepage-header">
@@ -15,23 +18,29 @@
             <p>Casa 321</p>
             <p>Nome da casa aqui</p>
         </div>
+
+        <div class="logout-button" title="Sair da casa selecionada">
+            <a href="PLACEHOLDER"><span class="material-symbols-outlined">logout</span></a>
+        </div>
     </header>
 
     <main>
-        <ul class="homepage-buttons">
-            <li class="homepage-button">
-                <a href="leitura.html">
-                    <img src="img/fazer_leitura.jpg" alt="">
-                    <h2>Fazer a leitura</h2>
-                </a>
-            </li>
-            <li class="homepage-button">
-                <a href="historico.html">
-                    <img src="img/placeholder.jpg" alt="">
-                    <h2>Histórico e Pagamento</h2>
-                </a>
-            </li>
-        </ul>
+        <nav>
+            <ul class="homepage-buttons">
+                <li class="homepage-button">
+                    <a href="leitura.html">
+                        <img src="img/fazer_leitura.jpg" alt="">
+                        <h2>Fazer a leitura</h2>
+                    </a>
+                </li>
+                <li class="homepage-button">
+                    <a href="historico.html">
+                        <img src="img/placeholder.jpg" alt="">
+                        <h2>Histórico e Pagamento</h2>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </main>
 
     <script src="interaction.js"></script>

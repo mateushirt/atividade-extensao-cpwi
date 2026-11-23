@@ -113,9 +113,10 @@ header.segment-header {
 
 .step.picture {
     & p {
+        width: fit-content;
+        max-width: 80vw;
         font-size: 14pt;
         margin: 0 auto;
-        width: 89vw;
     }
 
     label {

@@ -1,0 +1,7 @@
+*.env
+*.zip
+*.7z
+*.rar
+*.txt
+*.md
+!README.md
