@@ -331,34 +331,45 @@ header.segment-header {
     }
 }
 
-.bill {
-    border-radius: 10px;
-    padding: 10px;
+#bills details {
     border: 2px solid var(--cor-principal);
-    margin-bottom: 5px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    & summary { list-style: none; }
 
     & .month {
         color: var(--cor-principal);
-        font-size: 16px;
         font-weight: bold;
-    }
-
-    & .read, & .value {
-        margin-right: 5px;
-        font-size: 14px;
-    }
-
-    & .read::after {
-        content: ' | ';
-        color: #555;
+        font-size: 16px;
     }
 
     &:hover {
         background-color: var(--cor-secundaria);
+        border-color: transparent;
+        color: var(--branco);
         cursor: pointer;
 
         & .month {
-            color: var(--preto);
+            color: var(--branco);
+        }
+    }
+
+    & .reading-details {
+        & table { border-collapse: collapse; }
+
+        & th {
+            font-weight: bold;
+            text-align: left;
+            min-width: 140px;
+            font-size: 10pt;
+        }
+
+        & td {
+            font-weight: normal;
+            text-align: right;
+            min-width: 40px;
         }
     }
 }

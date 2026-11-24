@@ -1,6 +1,6 @@
 // VERIFICAR: Jogar essas funções em arquivos .js separados, está virando um espaguete
 
-const current_house = 321;
+const meses_ano = [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ];
 
 // Retira o logo da associação se identificar que está utilizando a imagem de placeholder (sem logo)
 verify_logo();
@@ -10,6 +10,7 @@ function verify_logo() {
 }
 
 // Informações do localStorage
+localStorage.clear(); // Usado por enquanto, só para ficar limpando o localStorage enquanto desenvolvo. Tem que ser retirado depois
 const houses = houses_information();
 function houses_information(){
 	const saved_info = localStorage.getItem('houses');
@@ -105,10 +106,63 @@ input_elements.forEach((input, index) => {
 	})
 })
 
-// VERIFICAR: Atualiza os dados do histórico
+// Atualiza os dados do histórico
 update_historic_info();
 function update_historic_info() {
-	console.log(`Número: ${houses[1].house_number}`);
-	console.log(`Nome: ${houses[1].house_name}`);
-	console.log(`Leituras: ${houses[1].readings}`);
+	const bills_element = document.querySelector('#bills');
+	if(!bills_element) { return; }
+	
+	const readings = houses[1].readings;
+	const number_boxes_elements = document.querySelectorAll('.number-box');
+	const number_boxes_span_elements = [
+		number_boxes_elements[0].querySelector('span'),
+		number_boxes_elements[1].querySelector('span'),
+		number_boxes_elements[2].querySelector('span'),
+	];
+
+	number_boxes_span_elements[0].innerHTML = `${readings[readings.length - 1].consumption_m3} m³`;
+
+	var averange = 0;
+	for(var i = 0; i < readings.length; i++) { averange += readings[i].consumption_m3; }
+	averange /= readings.length;
+	number_boxes_span_elements[1].innerHTML = `${averange.toFixed(2)} m³`;
+
+	var greater = 0, greater_month = null;
+	for(var i = 0; i < readings.length; i++) {
+		if (readings[i].consumption_m3 > greater) {
+			greater = readings[i].consumption_m3;
+			greater_month = readings[i].month;
+		}
+	}
+	number_boxes_span_elements[2].innerHTML = month_format(greater_month);
+
+	for(var i = (readings.length - 1); i > 0; i--) {
+		var current = readings[i];
+		bills_element.innerHTML += `
+			<details>
+				<summary>
+					<span class="month">${month_format(current.month)} ${current.status == 'pending' ? '(em análise)' : ''}</span>
+				</summary>
+				
+				<div class="reading-details">
+					<table>
+						<tr>
+							<th>Leitura</th>
+							<td>${current.hydrometer_numbers}</td>
+						</tr>
+						<tr>
+							<th>Consumo</th>
+							<td>${current.consumption_m3} m³</td>
+						</tr>
+						<tr>
+							<th>Valor</th>
+							<td>R$ ${current.value_cents / 100}</td>
+						</tr>
+					</table>
+				</div>
+			</details>
+		`;
+	}
 }
+
+function month_format(month) { return `${meses_ano[month.slice(-2) - 1]}/${month.slice(0, 4)}`; }
