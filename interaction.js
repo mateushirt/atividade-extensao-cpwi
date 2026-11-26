@@ -1,6 +1,7 @@
 // VERIFICAR: Jogar essas funções em arquivos .js separados, está virando um espaguete
 
 const meses_ano = [ 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez' ];
+let current_house = 0;
 
 // Retira o logo da associação se identificar que está utilizando a imagem de placeholder (sem logo)
 verify_logo();
@@ -106,13 +107,15 @@ input_elements.forEach((input, index) => {
 	})
 })
 
-// Atualiza os dados do histórico
 update_historic_info();
+update_graph_info();
+
+// Atualiza os dados do histórico
 function update_historic_info() {
 	const bills_element = document.querySelector('#bills');
 	if(!bills_element) { return; }
 	
-	const readings = houses[1].readings;
+	const readings = houses[current_house].readings;
 	const number_boxes_elements = document.querySelectorAll('.number-box');
 	const number_boxes_span_elements = [
 		number_boxes_elements[0].querySelector('span'),
@@ -125,7 +128,7 @@ function update_historic_info() {
 	var averange = 0;
 	for(var i = 0; i < readings.length; i++) { averange += readings[i].consumption_m3; }
 	averange /= readings.length;
-	number_boxes_span_elements[1].innerHTML = `${averange.toFixed(2)} m³`;
+	number_boxes_span_elements[1].innerHTML = `${averange.toFixed(2).replace('.', ',')} m³`;
 
 	var greater = 0, greater_month = null;
 	for(var i = 0; i < readings.length; i++) {
@@ -136,6 +139,8 @@ function update_historic_info() {
 	}
 	number_boxes_span_elements[2].innerHTML = month_format(greater_month);
 
+	if (readings.length > 0) { bills_element.innerHTML = ''; }
+
 	for(var i = (readings.length - 1); i > 0; i--) {
 		var current = readings[i];
 		bills_element.innerHTML += `
@@ -145,6 +150,7 @@ function update_historic_info() {
 				</summary>
 				
 				<div class="reading-details">
+					<hr>
 					<table>
 						<tr>
 							<th>Leitura</th>
@@ -162,6 +168,63 @@ function update_historic_info() {
 				</div>
 			</details>
 		`;
+	}
+}
+
+function update_graph_info() {
+	const graph_element = document.querySelector('.bar-graph');
+	if(!graph_element) { return; }
+
+	const readings = houses[current_house].readings.slice(-6);
+	const total_months = readings.length;
+	var greater_reading_consumption = 0;
+	var greater_reading_month = 0;
+
+	var counter = 0;
+	for (var i = 0; i < total_months; i++) {
+		counter++;
+		if (counter > 6) { break; }
+		
+		var current = readings[i];
+
+		if (current.consumption_m3 > greater_reading_consumption) {
+			greater_reading_consumption = current.consumption_m3;
+			greater_reading_month = current.month;
+		}
+	}
+
+	if (total_months > 0) { graph_element.innerHTML = ''; }
+
+	counter = 0;
+	for (var i = 0; i < total_months; i++) {
+		counter++;
+		if (counter > 6) { break; }
+		
+		var current = readings[i];
+
+		var percent = 0;
+		if (current.month == greater_reading_month) { percent = 100; }
+		else { percent = (current.consumption_m3 / greater_reading_consumption) * 100 }
+
+		graph_element.innerHTML = `
+		<div class="data">
+			<span class="month">${month_format(current.month).slice(0, 3)}</span>
+			<div class="bar ${current.status != 'confirmed' ? 'pending' : ''}" style="--porcentagem: ${percent}%;"></div>
+			<span class="read">${current.consumption_m3} m³</span>
+		</div>
+	` + graph_element.innerHTML;
+	}
+
+	if (counter < 6) {
+		for (var i = 0; i < (6 - counter); i++) {
+			graph_element.innerHTML += `
+				<div class="data">
+					<span class="month">-</span>
+					<div class="bar" style="--porcentagem: 0%;"></div>
+					<span class="read">- m³</span>
+				</div>
+			`;
+		}
 	}
 }
 

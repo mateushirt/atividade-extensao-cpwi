@@ -47,5 +47,13 @@ const houses_data = [
 			{ "month": "2026-10", "hydrometer_numbers": "2460", "consumption_m3": 17, "value_cents": 6160, "status": "confirmed", "photo": null },
 			{ "month": "2026-11", "hydrometer_numbers": "2480", "consumption_m3": 20, "value_cents": 7600, "status": "confirmed", "photo": null }
 		]
+	},
+	{
+		"house_number": 567,
+		"house_name": null,
+		"initial_reading": "2460",
+		"readings": [
+			{ "month": "2026-11", "hydrometer_numbers": "2480", "consumption_m3": 20, "value_cents": 7600, "status": "confirmed", "photo": null }
+		]
 	}
 ];
